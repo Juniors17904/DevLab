@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  background-color: var(--fondo-base, #0d1117);
+  color: var(--texto-primario, #e6edf3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #30363d; border-radius: 2px; }
+
+/* Transiciones entre pantallas (View Transitions API) */
+@keyframes salida-izquierda {
+  to { transform: translateX(-28px); opacity: 0; }
+}
+@keyframes entrada-derecha {
+  from { transform: translateX(28px); opacity: 0; }
+}
+@keyframes salida-derecha {
+  to { transform: translateX(28px); opacity: 0; }
+}
+@keyframes entrada-izquierda {
+  from { transform: translateX(-28px); opacity: 0; }
+}
+
+::view-transition-old(root) {
+  animation: salida-izquierda 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+::view-transition-new(root) {
+  animation: entrada-derecha 240ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+html[data-transicion='atras']::view-transition-old(root) {
+  animation-name: salida-derecha;
+}
+html[data-transicion='atras']::view-transition-new(root) {
+  animation-name: entrada-izquierda;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* Aparición escalonada de tarjetas al entrar a una pantalla */
+@keyframes aparecer-tarjeta {
+  from { transform: translateY(14px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.tarjeta-animada {
+  animation: aparecer-tarjeta 340ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Banner de éxito: entra deslizándose desde arriba */
+@keyframes entrar-banner {
+  from { transform: translateY(-12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.banner-animado {
+  animation: entrar-banner 280ms cubic-bezier(0.34, 1.3, 0.64, 1) both;
+}
+
+/* Carita: pop elástico al cambiar de estado */
+@keyframes pop-carita {
+  0% { transform: scale(0.3); opacity: 0; }
+  60% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.carita-pop {
+  display: inline-block;
+  animation: pop-carita 360ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Visor de galería: entrada de imagen al deslizar */
+@keyframes gal-desde-derecha {
+  from { transform: translateX(40px); opacity: 0.3; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes gal-desde-izquierda {
+  from { transform: translateX(-40px); opacity: 0.3; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.desde-derecha { animation: gal-desde-derecha 220ms ease; }
+.desde-izquierda { animation: gal-desde-izquierda 220ms ease; }
+
+/* Portada al cambiar de punto en la galería */
+@keyframes portada-aparecer {
+  0% { opacity: 0; transform: scale(0.85); }
+  25% { opacity: 1; transform: scale(1); }
+  70% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.05); }
+}
+.portada-punto { animation: portada-aparecer 900ms ease both; }
+.portada-punto > div { background: rgba(0,0,0,0.35); backdrop-filter: blur(2px); padding: 2rem 1.5rem; border-radius: 1.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tarjeta-animada,
+  .banner-animado,
+  .carita-pop,
+  .desde-derecha,
+  .desde-izquierda,
+  .portada-punto {
+    animation: none;
+  }
+}
