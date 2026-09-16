@@ -43,6 +43,10 @@ export default defineConfig({
           { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
           { src: 'icon-512-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
+        screenshots: [
+          { src: 'screenshots/mobile-1.png', sizes: '412x915', type: 'image/png', form_factor: 'narrow', label: 'Pantalla de inicio de DevLab en movil' },
+          { src: 'screenshots/desktop-1.png', sizes: '1280x800', type: 'image/png', form_factor: 'wide', label: 'Pantalla de inicio de DevLab en escritorio' },
+          ],
       },
     }),
   ],
