@@ -1,0 +1,10 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+          "namespace": "android_app",
+          "package_name": "app.vercel.dev_lab_delta.twa",
+          "sha256_cert_fingerprints": [
+                  "EB:4D:E2:1E:D4:CA:BE:F6:87:72:85:56:F4:E7:4A:94:89:2B:00:2B:EC:1C:F9:83:D7:79:49:CC:53:F3:50:A9"
+          ]
+    }
+}]
